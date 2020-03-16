@@ -1,0 +1,12 @@
+.report {
+  width: 60%;
+  min-height: 500px;
+  background-color: red;
+  margin: auto;
+}
+.report_title {
+  width: 50%;
+  margin: auto;
+  text-align: center;
+  font-weight: 500;
+}
