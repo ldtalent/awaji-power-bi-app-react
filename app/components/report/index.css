@@ -1,7 +1,6 @@
 .report {
-  width: 60%;
-  min-height: 500px;
-  background-color: red;
+  width: 90%;
+  height: 80vh;
   margin: auto;
 }
 .report_title {
