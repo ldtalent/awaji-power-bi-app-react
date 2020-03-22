@@ -1,14 +1,15 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import RadioBtn from '../radioBtn/index.jsx';
 
 const ReportToggle = ({ radioBtnArray, radioBtnOnChange}) => {
-    console.log(radioBtnArray);
-    const radioBtns = radioBtnArray.map((item) => {
+    const radioBtns = radioBtnArray.map(({ name, active}) => {
         return <RadioBtn
-            text={item}
-            value={item}
-            key={item}
+            text={name}
+            value={name}
+            key={name}
+            active={active}
             changeHandler={radioBtnOnChange}
         />
     });
@@ -18,6 +19,11 @@ const ReportToggle = ({ radioBtnArray, radioBtnOnChange}) => {
             {radioBtns}
         </form>
     );
+};
+
+ReportToggle.propTypes = {
+    radioBtnArray: PropTypes.array.isRequired,
+    radioBtnOnChange: PropTypes.func.isRequired
 };
 
 export default ReportToggle;

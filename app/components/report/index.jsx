@@ -11,17 +11,35 @@ import './index.scss';
 
 const Report = () => {
     const [viewMode, setViewMode] = useState('view');
-    const [ reportResponse, setReportResponse ] = useState({
+    const [reportResponse, setReportResponse] = useState({
         reportId: "",
         embedToken: "",
         embedUrl: ""
     });
+    const [radioBtnState, setRadioBtnState] = useState({
+        view: true,
+        edit: false,
+        create: false
+    });
+    
 
     const bucket = React.createRef();
-    const radioArray = ['create', 'view', 'edit'];
+    const { view, edit, create } = radioBtnState;
+
+    const radioArray = [
+        { name: 'view', active: view },
+        { name: 'edit', active: edit },
+        { name: 'create', active: create },
+    ];
 
     const getReportEmbedType = (embedType) => {
         setViewMode(embedType);
+        setRadioBtnState({
+            view: false,
+            edit: false,
+            create: false,
+            [embedType]: true
+        });
     };
 
     const renderReport = (reportId, embedToken, embedUrl) => {
@@ -45,7 +63,7 @@ const Report = () => {
             }).then(response => response.json())
 
             setReportResponse({
-                reportId:  response.ReportId,
+                reportId: response.ReportId,
                 embedToken: response.EmbedToken,
                 embedUrl: response.EmbedUrl
             });
@@ -55,14 +73,15 @@ const Report = () => {
     };
 
     useEffect(() => {
-        const url = 'https://pbifunc2.azurewebsites.net/api/HttpTriggerCSharp1?code=dl9o4wFwwLKuJubIrukK0Gg9vd6JVStRiuUQiS6/lta1aLhNVW55cA==';
+        const url = '';
         getUrl(url);
     }, []);
 
     useEffect(() => {
-        const {reportId, embedToken, embedUrl} = reportResponse;
+        powerbi.reset(bucket.current);
+        const { reportId, embedToken, embedUrl } = reportResponse;
 
-        if(reportId) renderReport(reportId, embedToken, embedUrl);
+        if (reportId) renderReport(reportId, embedToken, embedUrl);
     }, [reportResponse, viewMode]);
 
     return (

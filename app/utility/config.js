@@ -10,7 +10,7 @@ export default (
             tokenType: pbiInstance.models.TokenType.Embed,
             accessToken,
             embedUrl,
-            datasetId: 'e5bcb264-794e-4ae4-ad55-dd7c7967673b'
+            datasetId: ''
         },
         edit: {
             type: 'report',
