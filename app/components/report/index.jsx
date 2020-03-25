@@ -73,7 +73,7 @@ const Report = () => {
     };
 
     useEffect(() => {
-        const url = '';
+        const url = process.env.AZURE_URL;
         getUrl(url);
     }, []);
 
